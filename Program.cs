@@ -32,7 +32,7 @@ namespace TP_Thread_Dotnet
             CTest TestB = new CTest();
             Thread B = new Thread(TestB.AfficheB);
             B.Name = "Thread B";
-            //B.Start();
+            B.Start();
 
             CTest TestC = new CTest();
             Thread C = new Thread(TestC.AfficheC);

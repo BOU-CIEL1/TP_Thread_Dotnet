@@ -10,6 +10,7 @@ namespace TP_Thread_Dotnet
     public class CTest
     {
         private int div;
+        private object _locker = new object();
         public int Calcul(int val)
         {
             div = val;
@@ -26,7 +27,11 @@ namespace TP_Thread_Dotnet
             // Affiche toutes les secondes "AfficheA thread:" suivi du nom du thread qui exécute la tâche
             while (true)
             {
-                Console.WriteLine($"AfficheB thread: {Thread.CurrentThread.Name}");
+                div = 10;
+                lock (_locker)
+                {
+                    Console.WriteLine($"AfficheB thread: {Thread.CurrentThread.Name}; Résultat Calcul: {Calcul(div)}");
+                }
                 // Bloque le thread pendant 1000ms = 1s
                 Thread.Sleep(1000);
             }
@@ -37,9 +42,12 @@ namespace TP_Thread_Dotnet
         {
             for (int i = 0; i < 100; i++)
             {
-                div = 0;
-                Console.WriteLine($"AfficheC thread: {Thread.CurrentThread.Name}; Numéro: {Thread.CurrentThread.ManagedThreadId}; Valeur itération: {i}; Résultat Calcul: {Calcul(div)}");
-        
+                div = 10;
+                lock (_locker)
+                {
+                    Console.WriteLine($"AfficheC thread: {Thread.CurrentThread.Name}; Numéro: {Thread.CurrentThread.ManagedThreadId}; Valeur itération: {i}; Résultat Calcul: {Calcul(div)}");
+                }
+
                 //Console.WriteLine($"AfficheC thread: {Thread.CurrentThread.Name}; Numéro: {Thread.CurrentThread.ManagedThreadId}; Valeur itération: {i}");
                 //Thread.Sleep(1000);
             }
