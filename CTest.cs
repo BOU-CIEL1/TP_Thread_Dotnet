@@ -23,14 +23,11 @@ namespace TP_Thread_Dotnet
 
         public void AfficheC()
         {
-            while (true)
-            {
                 for (int i = 0; i < 100; i++)
                 {
                     Console.WriteLine($"AfficheC thread: {Thread.CurrentThread.Name}; Numéro: {Thread.CurrentThread.ManagedThreadId}; Valeur itération: {i}");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(1);
                 }
-            }
         }
     }
 }
