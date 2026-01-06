@@ -11,23 +11,38 @@ namespace TP_Thread_Dotnet
         static void Main(string[] args)
         {
 
-            // Threads
+            // Thread principal
             Thread main = Thread.CurrentThread;
             Thread.CurrentThread.Name = "Thread Principal";
-            Thread A = new Thread(AfficheA);
-            Thread B = new Thread(AfficheA);
-            Thread C = new Thread(AfficheA);
-            A.Name = "Thread A";
-            B.Name = "Thread B";
-            C.Name = "Thread C";
-            A.Start();
-            B.Start();
-            C.Start();
 
             // Affichage des informations thread principal
             Console.WriteLine($"Thread principal\n N°: {main.ManagedThreadId}\n Etat: {main.ThreadState}\n Nom: {main.Name}\n");
 
-            // Lancement des threads
+            // Autres Threads
+            Thread A = new Thread(AfficheA);
+            Thread A2 = new Thread(AfficheA);
+            Thread A3 = new Thread(AfficheA);
+            A.Name = "Thread A";
+            A2.Name = "Thread A2";
+            A3.Name = "Thread A3";
+            A.Start();
+            A2.Start();
+            A3.Start();
+
+            CTest TestB = new CTest();
+            Thread B = new Thread(TestB.AfficheB);
+            B.Name = "Thread B";
+            B.Start();
+
+            CTest TestC = new CTest();
+            Thread C = new Thread(TestC.AfficheC);
+            Thread C2 = new Thread(TestC.AfficheC);
+            C.Name = "Thread C";
+            C2.Name = "Thread C2";
+            C.Start();
+            C2.Start();
+
+
             // new Thread(AfficheA).Start();
 
         }
