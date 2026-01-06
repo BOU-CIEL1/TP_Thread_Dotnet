@@ -40,10 +40,10 @@ namespace TP_Thread_Dotnet
             C.Name = "Thread C";
             C2.Name = "Thread C2";
             C.Start();
-            C.Join();
-            Console.WriteLine("Fin du programme C, début du programme C2");
+            //C.Join();
+            //Console.WriteLine("Fin du programme C, début du programme C2");
             C2.Start();
-            C2.Join();
+            //C2.Join();
             
             // Afficher "fin du programme" lorsque tous les threads ont fini leur exécution
             Console.WriteLine("Fin du programme C2");
