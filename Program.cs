@@ -32,21 +32,32 @@ namespace TP_Thread_Dotnet
             CTest TestB = new CTest();
             Thread B = new Thread(TestB.AfficheB);
             B.Name = "Thread B";
-            B.Start();
+            //B.Start();
 
             CTest TestC = new CTest();
             Thread C = new Thread(TestC.AfficheC);
             Thread C2 = new Thread(TestC.AfficheC);
             C.Name = "Thread C";
             C2.Name = "Thread C2";
-            C.Start();
+            //C.Start();
             //C.Join();
             //Console.WriteLine("Fin du programme C, début du programme C2");
-            C2.Start();
+            //C2.Start();
             //C2.Join();
-            
+
+            CTest TestFD = new CTest();
+
+            Thread F = new Thread(TestFD.CalculF);
+            F.Name = "Thread F";
+
+            Thread D = new Thread(TestFD.AfficheD);
+            D.Name = "Thread D";
+
+            F.Start();
+            D.Start();
+
             // Afficher "fin du programme" lorsque tous les threads ont fini leur exécution
-            Console.WriteLine("Fin du programme C2");
+            //Console.WriteLine("Fin du programme C2");
 
             //new Thread (AfficheA).Start();
 

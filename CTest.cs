@@ -11,6 +11,8 @@ namespace TP_Thread_Dotnet
     {
         private int div;
         private object _locker = new object();
+        EventWaitHandle _waitHandle = new AutoResetEvent(false);
+        private int result;
         public int Calcul(int val)
         {
             div = val;
@@ -51,6 +53,24 @@ namespace TP_Thread_Dotnet
                 //Console.WriteLine($"AfficheC thread: {Thread.CurrentThread.Name}; Numéro: {Thread.CurrentThread.ManagedThreadId}; Valeur itération: {i}");
                 //Thread.Sleep(1000);
             }
+        }
+
+        public void CalculF()
+        {
+            // Fait un calcul et signale la disponibilité du résultat
+            Console.WriteLine($"{Thread.CurrentThread.Name} : Début du calcul...");
+            Thread.Sleep(1000);
+            result = 1 + 2;
+            Console.WriteLine($"{Thread.CurrentThread.Name} : Calcul terminé! Envoi du signal.");
+            _waitHandle.Set();
+        }
+
+        public void AfficheD()
+        {
+            // Attends le signal du thread précédent pour afficher le résultat
+            Console.WriteLine($"{Thread.CurrentThread.Name} : En attente du résultat...");
+            _waitHandle.WaitOne();
+            Console.WriteLine($"{Thread.CurrentThread.Name} : Résultat reçu = {result} ");
         }
     }
 }
